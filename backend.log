@@ -1,0 +1,31 @@
+
+> examination-system-backend@1.0.0 start
+> node server.js
+
+🚀 Server running on port 5001
+📊 Environment: development
+🌐 API URL: http://localhost:5001
+✅ Connected to MongoDB successfully
+::1 - - [15/Oct/2025:02:40:29 +0000] "GET /api/exams? HTTP/1.1" 401 69 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+::1 - - [15/Oct/2025:02:40:29 +0000] "GET /api/exams? HTTP/1.1" 401 69 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+Login request received: { email: 'd.mokshyagna@gmail.com', password: '123456' }
+User not found: d.mokshyagna@gmail.com
+::1 - - [15/Oct/2025:02:40:58 +0000] "POST /api/auth/login HTTP/1.1" 400 49 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+Registration request received: {
+  name: 'moksha',
+  email: 'd.mokshyagnayadav@gmail.com',
+  password: '123456',
+  role: 'admin',
+  institution: 'mic',
+  department: 'cse'
+}
+User already exists: d.mokshyagnayadav@gmail.com
+::1 - - [15/Oct/2025:02:41:25 +0000] "POST /api/auth/register HTTP/1.1" 400 49 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+Login request received: { email: 'd.mokshyagnayadav@gmail.com', password: '123456' }
+User logged in successfully: {
+  id: '68ee98d985e3b221596b7cb9',
+  name: 'moksh',
+  email: 'd.mokshyagnayadav@gmail.com',
+  role: 'admin'
+}
+::1 - - [15/Oct/2025:02:41:38 +0000] "POST /api/auth/login HTTP/1.1" 200 377 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"

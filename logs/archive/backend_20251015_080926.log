@@ -1,0 +1,11 @@
+
+> examination-system-backend@1.0.0 start
+> node server.js
+
+🚀 Server running on port 5001
+📊 Environment: development
+🌐 API URL: http://localhost:5001
+✅ Connected to MongoDB successfully
+::1 - - [15/Oct/2025:01:53:01 +0000] "GET /api/exams? HTTP/1.1" 401 69 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+::1 - - [15/Oct/2025:01:53:01 +0000] "GET /api/exams? HTTP/1.1" 401 69 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+::1 - - [15/Oct/2025:01:53:17 +0000] "GET / HTTP/1.1" 200 91 "-" "curl/8.7.1"

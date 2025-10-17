@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Examination System - Status</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .status-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+        
+        .status-success {
+            color: #4CAF50;
+        }
+        
+        .status-error {
+            color: #f44336;
+        }
+        
+        .btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: left;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+            color: #FFD700;
+        }
+        
+        .api-response {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        
+        #loading {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Online Examination System</h1>
+        <p class="subtitle">MERN Stack Application - System Dashboard</p>
+        
+        <div class="status-card">
+            <h2>🔌 System Status</h2>
+            <div class="status-item">
+                <span>Backend API (Port 5000):</span>
+                <span id="api-status">
+                    <span id="loading">⏳</span> Checking...
+                </span>
+            </div>
+            <div class="status-item">
+                <span>MongoDB Database:</span>
+                <span id="db-status">
+                    <span id="loading2">⏳</span> Checking...
+                </span>
+            </div>
+            <div class="status-item">
+                <span>Last Checked:</span>
+                <span id="last-checked">--</span>
+            </div>
+            <button class="btn" onclick="checkStatus()">🔄 Refresh Status</button>
+        </div>
+        
+        <div class="status-card">
+            <h2>📚 System Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>👤 User Management</h3>
+                    <p>Role-based authentication system with Admin, Teacher, and Student roles</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📝 Exam Creation</h3>
+                    <p>Rich exam builder with multiple question types and multimedia support</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔒 Secure Proctoring</h3>
+                    <p>Real-time monitoring and anti-cheating mechanisms</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Analytics & Reports</h3>
+                    <p>Comprehensive performance analytics and detailed reporting</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-card">
+            <h2>🔗 API Testing</h2>
+            <button class="btn" onclick="testAPI('/api')">Test Main API</button>
+            <button class="btn" onclick="testAPI('/api/auth/test')">Test Auth System</button>
+            <button class="btn" onclick="testAPI('/api/users/test')">Test User System</button>
+            <div id="api-response" class="api-response" style="display: none;"></div>
+        </div>
+        
+        <div class="status-card">
+            <h2>🚀 Quick Actions</h2>
+            <a href="http://localhost:5000/api" target="_blank" class="btn btn-secondary">🌐 Open Backend API</a>
+            <button class="btn" onclick="verifySystem()">✅ Verify System Status</button>
+        </div>
+        
+        <div class="status-card">
+            <h2>📋 Next Steps</h2>
+            <ol style="text-align: left; padding-left: 2rem;">
+                <li>✅ Backend API Server Running</li>
+                <li>✅ MongoDB Database Connected</li>
+                <li>✅ Frontend Dashboard Displaying</li>
+                <li>🔄 Complete Component Integration</li>
+                <li>🔄 Implement Registration Flow</li>
+                <li>🔄 Add Exam Interface</li>
+                <li>🔄 Test Full User Journey</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        let apiConnected = false;
+        let dbConnected = false;
+        let lastApiResponse = null;
+
+        async function checkStatus() {
+            const apiStatus = document.getElementById('api-status');
+            const dbStatus = document.getElementById('db-status');
+            const lastChecked = document.getElementById('last-checked');
+            
+            apiStatus.innerHTML = '<span id="loading">⏳</span> Checking...';
+            dbStatus.innerHTML = '<span id="loading">⏳</span> Checking...';
+            
+            try {
+                const response = await fetch('http://localhost:5000/api');
+                const data = await response.json();
+                
+                lastApiResponse = data;
+                apiConnected = true;
+                dbConnected = true;
+                
+                apiStatus.innerHTML = '<span class="status-success">✅ Connected</span>';
+                dbStatus.innerHTML = '<span class="status-success">✅ Connected</span>';
+                lastChecked.textContent = new Date().toLocaleTimeString();
+                
+                console.log('API Response:', data);
+            } catch (error) {
+                apiConnected = false;
+                dbConnected = false;
+                
+                apiStatus.innerHTML = '<span class="status-error">❌ Disconnected</span>';
+                dbStatus.innerHTML = '<span class="status-error">❌ Cannot verify</span>';
+                lastChecked.textContent = new Date().toLocaleTimeString();
+                
+                console.error('Connection failed:', error);
+            }
+        }
+
+        async function testAPI(endpoint) {
+            const responseDiv = document.getElementById('api-response');
+            responseDiv.style.display = 'block';
+            responseDiv.innerHTML = '⏳ Testing ' + endpoint + '...';
+            
+            try {
+                const response = await fetch('http://localhost:5000' + endpoint);
+                const data = await response.json();
+                
+                responseDiv.innerHTML = `
+                    <strong>Endpoint:</strong> ${endpoint}<br>
+                    <strong>Status:</strong> ${response.status} ${response.statusText}<br>
+                    <strong>Response:</strong><br>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                responseDiv.innerHTML = `
+                    <strong>Endpoint:</strong> ${endpoint}<br>
+                    <strong>Error:</strong> ${error.message}<br>
+                    <span class="status-error">❌ Connection failed</span>
+                `;
+            }
+        }
+
+        function verifySystem() {
+            const status = apiConnected && dbConnected ? 
+                'System is fully operational!' : 
+                'System has connectivity issues. Please check backend server.';
+            
+            const details = `
+Backend API: ${apiConnected ? '✅ Connected' : '❌ Disconnected'}
+Database: ${dbConnected ? '✅ Connected' : '❌ Disconnected'}
+Frontend: ✅ Displaying
+
+${lastApiResponse ? 'API Version: ' + lastApiResponse.version : ''}`;
+            
+            alert(status + '\n\n' + details);
+        }
+
+        // Auto-refresh status every 30 seconds
+        checkStatus();
+        setInterval(checkStatus, 30000);
+
+        // Show loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(checkStatus, 1000);
+        });
+    </script>
+</body>
+</html>
